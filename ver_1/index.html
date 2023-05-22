@@ -1,0 +1,963 @@
+<html>
+<head>
+    <title>P1 calculator</title>
+    <style type="text/css">
+        body {
+            margin: 0px 0px 0px 0px;
+        }
+       
+        h1 {
+            font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, "AppleGothic", sans-serif;
+            font-size: 40px;
+            padding: 10px 10px;
+            text-align: center;
+            text-transform: uppercase;
+            text-rendering: optimizeLegibility;
+            color: black;
+            <--letter-spacing: .1em;-->
+            0 -1px 0 #fff, 
+            0 1px 0 #2e2e2e, 
+            0 2px 0 #2c2c2c, 
+            0 3px 0 #2a2a2a, 
+            0 4px 0 #282828, 
+            0 5px 0 #262626, 
+            0 6px 0 #242424, 
+            0 7px 0 #222, 
+            0 8px 0 #202020, 
+            0 9px 0 #1e1e1e, 
+            0 10px 0 #1c1c1c, 
+            0 11px 0 #1a1a1a, 
+            0 12px 0 #181818, 
+            0 13px 0 #161616, 
+            0 14px 0 #141414, 
+            0 15px 0 #121212, 
+            0 22px 30px rgba(0, 0, 0, 0.9);
+        }
+       
+        #calculator {
+            font-size: 0;
+            width: 400px;
+            background-color: #0A1B2A;
+            padding: 20px;
+            margin: auto;
+        }
+       
+        #result {
+            width: 385px;
+            height: 45px;
+            margin-bottom: 20px;
+            padding: 0px 5px 0px 5px;
+            background-color: white;
+            border-radius: 5px;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: inset 0 0px 3px;
+            font: 20px digital;
+        }
+
+        #latex {
+            width: 385px;
+            height: 200px;
+            margin-top: 10px;
+            padding: 0px 5px 0px 5px;
+            background-color: white;
+            border-radius: 5px;
+            display: inline-flex;
+            justify-content: flex-end;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: inset 0 0px 3px;
+            font: 20px digital;          
+        }
+       
+        .key {
+            width: 75px;
+            height: 30px;
+            background-color: #BDBDBD;
+            display: inline-flex;
+			border-radius: 2px;
+            margin: 1px 0px 0px 1px;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0px 5px 0px;
+            cursor: pointer;
+            font: Bold 15px digital;
+        }
+		.keySet{
+			width: 72.5px;
+            height: 25px;
+            background-color: #585858;
+            display: inline-flex;
+			border-radius: 10px;
+            margin: 2px 8px 12px 12px;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0px 5px 0px;
+            cursor: pointer;
+            font: bold 15px digital;
+			color: #F2F2F2;
+		}
+        .symbol-key {
+            font: italic 20px "Times New Roman"
+        }
+
+        .function-key {
+            font: italic 15px "Times New Roman"
+        }
+
+        .eval-key {
+            background-color: #4a9840;
+            color: white;
+        }
+       
+        .clear-key {
+            background-color: #bb1c09;
+            color: #ffffff;
+        }
+       
+        .key:active {
+            background-color: gray;
+            transform: translateY(2px);
+        }
+		.keySet:active {
+			background-color:#A2D1D5;
+			transform: translateY(2px);
+		}
+		
+		.var{
+			background-color: #585858;
+			width: 38px;
+			display: none;
+			position: absolute;
+			border: solid 1px #d0d0d0;
+			cursor: pointer;
+			margin-bottom: 1px;
+			padding: 2px;
+		}
+		.triFunc{
+			background-color: #585858;
+			width: 42px;
+			display: none;
+			position: absolute;
+			border: solid 1px #d0d0d0;
+			cursor: pointer;
+			margin-bottom: 1px;
+			padding: 2px;
+		}
+		.func{
+			background-color: #585858;
+			width: 38px;
+			display: none;
+			position: absolute;
+			border: solid 1px #d0d0d0;
+			cursor: pointer;
+			margin-bottom: 1px;
+			padding: 2px;
+		}
+		.const{
+			background-color: #585858;
+			width: 42px;
+			display: none;
+			position: absolute;
+			border: solid 1px #d0d0d0;
+			cursor: pointer;
+			margin-bottom: 1px;
+			padding: 2px;
+		}
+		.comp{
+			background-color: #585858;
+			width: 38px;
+			display: none;
+			position: absolute;
+			border: solid 1px #d0d0d0;
+			cursor: pointer;
+			margin-bottom: 1px;
+			padding: 2px;
+		}
+		.sfunc{
+			background-color: #585858;
+			width: 42px;
+			display: none;
+			position: absolute;
+			border: solid 1px #d0d0d0;
+			cursor: pointer;
+			margin-bottom: 1px;
+			padding: 2px;
+		}
+		.vector{
+			background-color: #585858;
+			width: 42px;
+			display: none;
+			position: absolute;
+			border: solid 1px #d0d0d0;
+			cursor: pointer;
+			margin-bottom: 1px;
+			padding: 2px;
+		}
+		.pare{
+			background-color: #585858;
+			width: 39px;
+			display: none;
+			position: absolute;
+			border: solid 1px #d0d0d0;
+			cursor: pointer;
+			margin-bottom: 1px;
+			padding: 2px;
+		}
+		.helpSelect{
+			width: 35px;
+            height: 30px;
+            background-color: #81BEF7;
+            display: inline-flex;
+            margin: 1px 0px 0px 1px;
+			border-radius: 20px;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0px 5px 0px;
+            cursor: pointer;
+            font: Bold 15px digital;
+		}
+		.helpSelect:active{
+			background-color: #01A9DB;
+			transform: translateY(2px);
+		}
+		.popupHelper{
+			position: absolute;
+			display: none;
+			justify-content: center;
+			background-color: #D8D8D8;
+			border: solid 1px #d0d0d0;
+			width: 385px;
+			padding: 10px;
+			align:center;
+		}
+		.close{
+			width: 30px;
+            height: 20px;
+            background-color: #585858;
+            display: inline-flex;
+			border-radius: 5px;
+            margin: 1px 0px 0px 1px;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 0px 5px 0px;
+            cursor: pointer;
+            font: Bold 15px digital;
+		}
+		.close:active{
+			background-color: #2E2E2E;
+			transform: translateY(2px);
+		}
+		.hisbtn{
+			width: 55px;
+            height: 40px;
+            background-color: #DA81F5;
+            display: inline-flex;
+			border-radius: 5px;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 1px 0px 0px 1px;
+            cursor: pointer;
+            font: Bold 15px digital;
+		}
+		.hisbtn:active{
+			background-color: #CC2EFA;
+			transform:translateY(2px);
+		}
+		.historyLayer{
+			position: absolute;
+			display: none;
+			justify-content: center;
+			background-color: #D8D8D8;
+			border: solid 1px #d0d0d0;
+			width: 385px;
+			height: 240px;
+			padding: 10px;
+			align:center;
+			overflow: scroll;
+		}
+		.copybtn{
+			width: 55px;
+            height: 40px;
+            background-color: #58FAD0;
+            display: inline-flex;
+			border-radius: 5px;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 1px 0px 0px 1px;
+            cursor: pointer;
+            font: Bold 15px digital;
+		}
+		.copybtn:active{
+			background-color: #01DFA5;
+			transform:translateY(2px);
+		}
+		.pastebtn{
+			width: 55px;
+            height: 40px;
+            background-color: #58FAD0;
+            display: inline-flex;
+			border-radius: 5px;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 1px 0px 0px 1px;
+            cursor: pointer;
+            font: Bold 15px digital;
+		}
+		.pastebtn:active{
+			background-color: #01DFA5;
+			transform:translateY(2px);
+		}
+		.matrix{
+			width: 55px;
+            height: 40px;
+            background-color: #BDBDBD;
+            display: inline-flex;
+			border-radius: 5px;
+            vertical-align: middle;
+            justify-content: center;
+            align-items: center;
+            padding: 1px 1px 1px 1px;
+            cursor: pointer;
+            font: Bold 15px digital;
+			margin: 1px 0px 0px 1px;
+		}
+		.matrix:active {
+			background-color:#A2D1D5;
+			transform: translateY(2px);
+		}
+		.tableLayer{
+			position: absolute;
+			display: none;
+			justify-content: center;
+			background-color: #D8D8D8;
+			border: solid 1px #d0d0d0;
+			width: 385px;
+			padding: 10px;
+			align:center;
+		}
+		#matrixTable{
+			border="1"; 
+			width="150"; 
+			height="150"; 
+			align="center"; 
+			bordercolor="white";
+		}
+    </style>
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js' type='text/javascript'></script>
+    <script src='source/math.js' type='text/javascript'></script>
+
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>  
+
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+          "HTML-CSS": { scale: 75}
+        });
+    </script>
+	
+
+    <script type="text/javascript">
+		var copycounter = 0;
+		var copytxt = "";
+		var txt = "";
+		function closeLayer(object){
+			$(object).parent().parent().hide();
+		}
+		function closeHelper(object){
+			$(object).parent().hide();
+		}
+		
+		function copyText(){
+			var copytxt = document.getElementById("latex");
+			copytxt.select();
+			document.execCommand("Copy");
+			console.log(copytxt);
+			txt = false;
+			txt = document.execCommand("Copy");
+			if( txt ){
+				console.log("복사된듯");
+			}else{
+				console.log("안된듯");
+				}
+		}
+        $(document).ready(function(){
+            var parser = math.parser();
+			var helpcounter = 0;
+            var displayValue = '0';
+			var history = new Array();
+			var hiscounter = 0;
+			var matrixcounter = 0;
+			var matrixvalue = ' ';
+			var matrixval = new Array();
+			var copytxt = "";
+            $('#result').text(displayValue);
+            $('#latex').html('$$' + math.parse(displayValue).toTex() + '$$');
+			
+			$('.hisbtn').click(function(e){
+				if(helpcounter == 1 | matrixcounter == 1) {
+					e.preventDefault();
+					return;
+				}
+				var btnleft = $('.helpSelect').offset().left;
+				$('.historyLayer').css({"top":120, "left":btnleft-5, "position":"absolute"}).show();
+			})
+			
+			$('.matrix').click(function(e){
+				var front = 0;
+				var back = 0;
+				var k = 0;
+				var matrixcreater = 0;
+				var valuecounter = 0;
+				var mcount = 0;
+				var matrixvalue = '';
+				if(helpcounter == 1) {
+					e.preventDefault();
+					return;
+				}
+				matrixcounter = 1;
+				matrixvalue = '';
+				matrixval.length = 0;
+				var btnleft = $('.helpSelect').offset().left;
+				$('.tableLayer').css({"top":120, "left":btnleft-5, "position":"absolute"}).show();
+				$('.close').click(function(e){
+					closeHelper(this);
+					matrixcounter = 0;
+					front = 0;
+					back = 0;
+					k=0;
+					mcount = 0;
+					if( displayValue == 'det(' || displayValue == 'cross(' ){
+						displayValue += matrixvalue;
+					}else{
+						displayValue = matrixvalue;
+					}
+					$("mr").html("");
+					$("#result").text(displayValue);
+					matrixvalue='';
+				});
+				$('.key').click(function(e){
+					if( matrixcounter != 1){
+						e.preventDefault();
+						return;
+					}else if( matrixcounter == 1){
+						if( matrixcreater == 1){						
+								if( k == valuecounter){
+									matrixcreater = 0;
+									matrixvalue += '[';
+									for( var i = 0; i < front ; i++){
+										matrixvalue += '[';
+										for(var j = 0; j < back-1; j++){
+											matrixvalue += matrixval[mcount++];
+											matrixvalue += ',';
+										}
+										matrixvalue += matrixval[mcount++];
+										matrixvalue += ']';
+										matrixvalue += ',';
+									}
+									matrixvalue = matrixvalue.substring(0, matrixvalue.length-1);
+									matrixvalue += ']';
+									$("mr").html(front + "*" +back+"행렬은<br>"+ matrixvalue + "  입니다. <br> 닫기를 누르시면 결과창에 나타납니다.");
+									return;
+								}
+								matrixval[k] = $(this).text();
+								k++;	
+						}
+						if( front == 0 ){
+							front = $(this).text();
+						}
+						else if ( back == 0){
+							back = $(this).text();
+							valuecounter = front * back;
+						}
+						
+						if( front == 0 || back == 0){
+							return;
+						}
+						else{
+							matrixcreater = 1;
+
+						}
+						$("mr").html(front + "*" +back+"행렬에 들어갈 값을 순차적으로 입력해주세요. 입력이 끝나면 아무키나 한번더 누르세요!");
+						
+					}
+					
+				});
+			})
+			
+
+			$('.copybtn').on('click',function(e){
+				if(helpcounter == 1 | matrixcounter == 1) {
+					e.preventDefault();
+					return;
+				}
+				var txt = $("[id=MathJax-Element-1]").text();
+				$('#clip_target').val(txt);	
+				copytxt = $('#clip_target').val();
+				$('#clip_target').val('');
+			})		
+			$('.pastebtn').click(function(e){
+				if(helpcounter == 1 | matrixcounter == 1) {
+					e.preventDefault();
+					return;
+				}
+				if(displayValue == '0'){
+					displayValue = copytxt;
+				}else{
+				displayValue += copytxt;}
+				$('#result').text(displayValue);
+			})
+			
+			$('.keySet').click(function(e){
+				if(helpcounter == 1) {
+					e.preventDefault();
+					return;
+				}
+				var divLeft = e.clientX + 5;
+				var divTop = e.clientY + 5;
+				var setClick = $(this).text();
+				if(setClick == '변수'){
+					$('.func').hide();
+					$('.triFunc').hide();
+					$('.const').hide();
+					$('.comp').hide();
+					$('.sfunc').hide();
+					$('.vector').hide();
+					$('.var').css({
+						"top": divTop,
+						"left":divLeft,
+						"position":"absolute"
+					}).show();
+				}
+				else if(setClick == '함수정의'){
+					$('.var').hide();
+					$('.triFunc').hide();
+					$('.const').hide();
+					$('.comp').hide();
+					$('.sfunc').hide();
+					$('.vector').hide();
+					$('.pare').hide();
+					$('.func').css({
+						"top": divTop,
+						"left":divLeft,
+						"position":"absolute"
+					}).show();
+				}
+				else if(setClick == '삼각함수'){
+					$('.var').hide();
+					$('.func').hide();
+					$('.const').hide();
+					$('.comp').hide();
+					$('.sfunc').hide();
+					$('.vector').hide();
+					$('.pare').hide();
+					$('.triFunc').css({
+						"top": divTop,
+						"left":divLeft,
+						"position":"absolute"
+					}).show();
+				}
+				else if(setClick == '상수'){
+					$('.var').hide();
+					$('.func').hide();
+					$('.triFunc').hide();
+					$('.comp').hide();
+					$('.sfunc').hide();
+					$('.vector').hide();
+					$('.pare').hide();
+					$('.const').css({
+						"top": divTop,
+						"left":divLeft,
+						"position":"absolute"
+					}).show();
+				}
+				else if(setClick == '부등호'){
+					$('.var').hide();
+					$('.func').hide();
+					$('.triFunc').hide();
+					$('.const').hide();
+					$('.sfunc').hide();
+					$('.vector').hide();
+					$('.pare').hide();
+					$('.comp').css({
+						"top": divTop,
+						"left":divLeft,
+						"position":"absolute"
+					}).show();
+				}
+				else if(setClick == '특수함수'){
+					$('.var').hide();
+					$('.func').hide();
+					$('.triFunc').hide();
+					$('.const').hide();
+					$('.comp').hide();
+					$('.vector').hide();
+					$('.pare').hide();
+					$('.sfunc').css({
+						"top": divTop,
+						"left":divLeft,
+						"position":"absolute"
+					}).show();
+				}
+				else if(setClick == '벡터함수'){
+					$('.var').hide();
+					$('.func').hide();
+					$('.triFunc').hide();
+					$('.const').hide();
+					$('.comp').hide();
+					$('.sfunc').hide();
+					$('.pare').hide();
+					$('.vector').css({
+						"top": divTop,
+						"left":divLeft,
+						"position":"absolute"
+					}).show();
+				}
+				else if(setClick == '괄호'){
+					$('.var').hide();
+					$('.func').hide();
+					$('.triFunc').hide();
+					$('.const').hide();
+					$('.comp').hide();
+					$('.sfunc').hide();
+					$('.vector').hide();
+					$('.pare').css({
+						"top": divTop,
+						"left":divLeft,
+						"position":"absolute"
+					}).show();
+				}
+				
+			})
+			$('.helpSelect').click(function (e){
+				helpcounter = 1;
+				var btnleft = $('.helpSelect').offset().left;
+				$('.popupHelper').css({"top":120, "left":btnleft-5, "position":"absolute"}).show();
+				$('.close').click(function(e){
+					closeHelper(this);
+					helpcounter = 0;
+				})
+				$('.key').click(function(e){
+					switch($(this).text()){
+						case "1": case"2": case"3" : case"4": case"5": case"6":
+						case"7": case"8": case"9": case"0":
+							$("ai").text("누른키는 각각 정수를 나타냅니다.");
+							break;
+						case "=":
+							$("ai").html("등호를 나타냅니다.<br>변수에 값을 대입할 때 사용하실수 있습니다<br>ex) x=4");
+							break;
+						case"/": case"*": case"-":case"+":case"%":
+							$("ai").html("각각 사칙연산을 나타냅니다. 추가적으로 %는 나머지 연산입니다. 수 연산 수 형식으로 사용합니다.<br>+ - 기호는 수의 음양을 나타낼수 있습니다.<br>ex) 4*5 -3/2");
+							break;
+						case".":
+							$("ai").html("소수점을 나타낼 때 사용합니다.<br>ex) .9 입력 시 출력값 : 0.9, 숫자.숫자 등");
+							break;
+						case",":
+							$("ai").html("벡터를 표현할 때 중괄호와 함께 사용합니다.<br>사용법 : [ a, b] a와b는 어떠한 상수,정수 혹은 변수 중 하나를 입력하시면 됩니다. [a,b,c]의 경우 3차원으로 적용됩니다.");
+							break;
+						case";":
+							$("ai").html("벡터를 표현할 때, 행을 구분시킬 때 사용합니다.<br>ex) [7,5;6,8] == [[7,5],[6,8]]의 2x2 행렬이 됩니다.");
+							break;
+						case"CL":
+							$("ai").html("화면의 모든 값을 초기화할 때 사용합니다. 위 아래 디스플레이의 모든 값이 사라집니다.<br>변수는 초기화 되지 않습니다.");
+							break;
+						case"EV":
+							$("ai").html("지금까지 입력한 값을 계산하는 버튼입니다.<br>일반 계산기의 = 버튼과 동일합니다. 연산의 결과를 출력합니다.");
+							break;
+						case"DL":
+							$("ai").html("입력된 수식중 가장 마지막에 입력된 값 하나를 지우는 버튼입니다. backspace에 해당하는 버튼입니다.");
+							break;
+						default :
+							$("ai").text("nothing");
+							break;
+					}
+				})
+				$('.keySet').click(function(e){
+					switch($(this).text()){
+						case"변수":
+							$("ai").html("w,x,y,z,i 의 5가지 변수를 사용할수 있습니다. 각각의 변수는 처음에 정의되어 있지 않으며, = 연산으로 값을 대입해준 뒤 사용하셔야합니다.값을 대입할때는 변수가 =의 왼쪽에 위치해야합니다.");
+							break;
+						case"함수정의":
+							$("ai").html("f와 g 두가지의 함수를 정의할 수 있습니다.<br>f(x)=x*5 등의 방식으로 함수를 정의할수 있으며, 이때의 x에는 값이 대입되지 않아도 상관 없습니다.");
+							break;
+						case"삼각함수":
+							$("ai").html("sin, cos, tan의 3가지 종류가 있으며, 각각 ()를 붙여서 사용합니다.<br>ex) sin(45)+cos(45)");
+							break;
+						case"상수":
+							$("ai").html("e, pi의 2가지 종류가 있습니다.<br>e와 pi에는 각각 알려져있는 값들이 대입되어 있습니다.");
+							break;
+						case"부등호":
+							$("ai").html("값을 비교할때 사용하는 부등호 기호들이 있습니다. <, >, <=, >=, ==, !=을 지원하며 true false를 반환합니다.");
+							break;
+						case"특수함수":
+							$("ai").html("log, exp, sqrt, ^로 구성되어 있습니다.<br>log, exp, sqrt는 괄호를 사용해서 사용하셔야 합니다.^는 괄호없이 바로 사용가능합니다.각각, sqrt는 루트값을, log는 로그값을, exp는 e의 제곱연산을, ^는 제곱연산을 나타냅니다. <br>ex) log(2), 2^3");
+							break;
+						case"벡터함수":
+							$("ai").html("cross, det, : 로 구성되어 있습니다.<br>cross는 외적 연산으로 cross([1,2,3],[4,5,6])의 형식으로 사용합니다.<br>det는 행렬식을 구하는 함수로, det([4,6;2,5])의 형식으로 사용합니다. <br>:는 숫자끼리 사용시, 앞에 오는 숫자부터 뒤에 오는 숫자까지를 나란하게 배열로 나타냅니다. 상수와 섞어서도 사용할수있습니다. ex) :4 == [1,2,3,4]");
+							break;
+						case"괄호":
+							$("ai").html("(,),[,]로 구성되어 있습니다. 각각 함수들에 쓰임에 맞게 사용하거나, 사칙연산의 우선순위를 정할 수 있습니다.");
+							break;
+						default:
+							break;
+							
+					}
+				})
+				$('.hisbtn').click(function(e){	
+					$("ai").html("계산했던 내역을 보여주는 버튼 입니다.<br>연산 과정 = 연산 결과 순으로 표기됩니다.");
+				})
+				$('.copybtn').click(function(e){	
+					$("ai").html("위의 칸의 계산 식 모두를 복사합니다.<br>부분 복사는 불가능 합니다.");
+				})
+				$('.pastebtn').click(function(e){
+					$("ai").html("복사했던 계산식을 아래 창에 붙여넣습니다.<br>기존의 식이 있다면 그 뒤에 이어붙여넣습니다. 기존 칸에 0만 있다면 0을 지우고 붙여넣습니다.");
+				})
+				$('.matrix').click(function(e){
+					$("ai").html("행렬을 보다 편하게 만들어주는 버튼입니다.<br>우선 두번의 숫자키 입력을 통해, 행렬의 크기를 선언하고, 이후의 입력을 통해 내부 값을 결정합니다. 마지막 추가 1회의 입력을 통해 결과를 표기해줍니다.결과 표기 전에 x키를 누르면 입력이 모두 사라지고, 결과를 표기한 후에 x키를 누르면 아래창에 결과를 붙여넣어줍니다.");
+				})
+				
+				$("ai").html("계산기 사용방법을 안내해드릴 도우미 입니다.<br>알고 싶은 항목을 클릭하여 주세요");
+			})
+			
+            $('.key').each(function(index, key){      
+                $(this).click(function(e){
+					if(helpcounter == 1 | matrixcounter == 1) {
+						e.preventDefault();
+						return;
+					}
+
+                    if(displayValue == '0') displayValue = ' ';
+
+                    if($(this).text() == 'EV')
+                    {
+                        try
+                        {
+							history[hiscounter] = displayValue;
+							$("hi").append(history[hiscounter] + " = ");
+							hiscounter+=1;
+                            displayValue = parser.eval(displayValue).toString();
+                            var tokens = displayValue.split(' ');
+                            if(tokens[0] == 'function')
+                            {
+                                displayValue = tokens[0];
+                            }
+                            $('#result').text(displayValue);
+							history[hiscounter] = displayValue;
+							$("hi").append(history[hiscounter]);
+							hiscounter +=1;
+                            displayValue = '0';
+							$("hi").append("<br>");
+                        }
+                        catch (e)
+                        {
+                            displayValue = '0';
+                            if(displayValue != 'function')
+                            {
+                                $('#result').text(e);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if($(this).text() == 'CL')
+                        {
+							displayValue = displayValue.substring(0, displayValue.length - displayValue.length);
+							displayValue = '0';
+                        }
+						else if( $(this).text() == 'DL'){
+							if( displayValue.length <= 1){
+								displayValue = '0';
+							}
+							else{
+								displayValue = displayValue.substring(0, displayValue.length-1);
+							}
+						}
+                        else
+                        {   	
+                            displayValue += $(this).text();
+                        }
+						$('#result').text(displayValue);
+                        var node = math.parse(displayValue);
+                        var latex = node.toTex({parenthesis: 'keep', implicit: 'hide'});
+                        var elem = MathJax.Hub.getAllJax('latex')[0];
+                        MathJax.Hub.Queue(['Text', elem, latex]);                      
+                    }
+
+                    e.preventDefault()
+                })
+            })
+			})
+    </script>
+</head>
+ 
+<body>
+    <h1>
+            Calculator
+    </h1>         
+    <div id="calculator">
+		<div id="latex"></div>
+		<div id="result"></div>
+			<div style="text-align:center">
+				<span class="keySet">변수</span>
+				<span class="keySet">함수정의</span>
+				<span class="keySet">삼각함수</span>
+				<span class="keySet">상수</span>
+			</div>
+			<div style="text-align:center">
+				<span class="keySet">부등호</span>
+				<span class="keySet">특수함수</span>
+				<span class="keySet">벡터함수</span>
+				<span class="keySet">괄호</span>
+			</div>
+		<div>
+			<span class="hisbtn">his</span>
+			<span class="copybtn" style="margin-left: 5px;" data-target="latex">copy</span>
+			<span class="pastebtn">paste</span>
+			<span class="key clear-key" style="margin-left:14.2%">CL</span>
+			<span class="key">DL</span>
+		</div>
+		<span class="key">/</span>
+        <span class="key">%</span>
+        <span class="key">1</span>
+        <span class="key">2</span>
+        <span class="key">3</span>	
+		
+		<span class="key">-</span>
+		<span class="key">+</span>
+        <span class="key">4</span>
+        <span class="key">5</span>
+        <span class="key">6</span>
+		
+		<span class="key">*</span>		
+		<span class="key">.</span>
+        <span class="key">7</span>
+        <span class="key">8</span>
+        <span class="key">9</span>
+
+        <span class="key">,</span>
+        <span class="key">;</span>
+		<span class="key">=</span>
+        <span class="key">0</span>
+		<span class="key eval-key">EV</span>
+
+		<span class="helpSelect">?</span>
+		<span class="matrix" style="margin-left:10%;">Matrix</span>
+		<input id="clip_target" type="text" value="" style="position:absolute;top:-9999em;"/>
+
+    </div>
+	
+	<!-- 변수 버튼 레이어-->
+	<div class="var">
+		<div> 
+			<span class="key symbol-key" onclick="closeLayer(this)"style="width:36px; height:20px;">w</span>
+			<span class="key symbol-key" onclick="closeLayer(this)"style="width:36px; height:20px;">x</span>
+			<span class="key symbol-key" onclick="closeLayer(this)"style="width:36px; height:20px;">y</span>
+			<span class="key symbol-key" onclick="closeLayer(this)"style="width:36px; height:20px;">z</span>
+			<span class="key symbol-key" onclick="closeLayer(this)"style="width:36px; height:20px;">i</span>
+			<span onclick="closeLayer(this)" style="cursor:pointer;font-size:12px; margin-left:70%;">X</span>
+		</div>
+	</div>
+	
+	<!--삼각 함수 레이어-->
+	<div class="triFunc">
+		<div>
+			<span class="key function-key" onclick="closeLayer(this)"style="width: 40px; height: 20px;">sin</span>
+			<span class="key function-key" onclick="closeLayer(this)"style="width: 40px; height: 20px;">cos</span>
+			<span class="key function-key" onclick="closeLayer(this)"style="width: 40px; height: 20px;">tan</span>
+			<span onclick="closeLayer(this)" style="cursor:pointer;font-size:13px; margin-left:70%;">X</span>
+		</div>
+	</div>
+	
+	<!-- 함수 레이어-->
+	<div class="func">
+		<div>
+			<span class="key symbol-key" onclick="closeLayer(this)" style="width:36px;height:20px;">f</span>
+			<span class="key symbol-key" onclick="closeLayer(this)" style="width:36px;height:20px;">g</span>
+			<span onclick="closeLayer(this)" style="cursor:pointer;font-size:12px;margin-left:70%;">X</span>
+		</div>
+	</div>
+	
+	<!-- 벡터 레이어-->
+	<div class="vector">
+		<div>
+			<span class="key function-key" onclick="closeLayer(this)" style="width:36px;height:20px;">cross</span>
+			<span class="key function-key" onclick="closeLayer(this)" style="width:36px;height:20px;">det</span>
+			<span class="key" onclick="closeLayer(this)" style="width:36px;height:20px;">:</span>
+			<span onclick="closeLayer(this)" style="cursor:pointer;font-size:12px;margin-left:70%;">X</span>
+		</div>
+	</div>
+	<!-- 상수 레이어-->
+	<div class="const">
+		<div>
+			<span class="key symbol-key" onclick="closeLayer(this)"style="width: 40px; height: 20px;">e</span>
+			<span class="key symbol-key" onclick="closeLayer(this)"style="width: 40px; height: 20px;">pi</span>
+			<span onclick="closeLayer(this)" style="cursor:pointer;font-size:12px; margin-left:70%;">X</span>
+		</div>
+	</div>
+	<!-- 특수 함수 레이어-->
+	<div class="sfunc">
+		<div>
+			<span class="key function-key" onclick="closeLayer(this)"style="width: 40px; height: 20px;">exp</span>
+			<span class="key function-key" onclick="closeLayer(this)"style="width: 40px; height: 20px;">log</span>
+			<span class="key function-key" onclick="closeLayer(this)"style="width: 40px; height: 20px;">sqrt</span>
+			<span class="key" onclick="closeLayer(this)"style="width: 40px; height: 20px;">^</span>
+			<span onclick="closeLayer(this)" style="cursor:pointer;font-size:12px; margin-left:70%;">X</span>
+		</div>
+	</div>
+	<!-- 부등호 레이어-->
+	<div class="comp">
+		<div>
+			<span class="key"onclick="closeLayer(this)" style="width:36px;height:20px;"><</span>
+			<span class="key"onclick="closeLayer(this)" style="width:36px;height:20px;">></span>
+			<span class="key"onclick="closeLayer(this)" style="width:36px;height:20px;"><=</span>
+			<span class="key"onclick="closeLayer(this)" style="width:36px;height:20px;">>=</span>
+			<span class="key"onclick="closeLayer(this)" style="width:36px;height:20px;">==</span>
+			<span class="key"onclick="closeLayer(this)" style="width:36px;height:20px;">!=</span>
+			
+			<span onclick="closeLayer(this)" style="cursor:pointer;font-size:12px; margin-left:70%;">X</span>
+		</div>
+	</div>
+	
+	<!-- 괄호 레이어 -->
+	<div class="pare">
+		<div>
+			<span class="key" onclick="closeLayer(this)" style="width:36px;height:20px;">(</span>
+			<span class="key" onclick="closeLayer(this)" style="width:36px;height:20px;">)</span>
+			<span class="key" onclick="closeLayer(this)" style="width:36px;height:20px;">[</span>
+			<span class="key" onclick="closeLayer(this)" style="width:36px;height:20px;">]</span>
+			<span onclick="closeLayer(this)" style="cursor:pointer;font-size:12px; margin-left:70%;">X</span>
+		</div>
+	</div>
+	
+	<div class="popupHelper">
+		<a>도움말</a><br>
+		<ai>계산기 사용방법을 안내해드릴 도우미 입니다.<br>
+		알고 싶은 항목을 클릭하여 주세요</ai><br>
+		<b class="close">x</b>
+	</div>
+	
+	<div class="historyLayer">
+		<hi></hi>
+		<b class="close" onclick="closeHelper(this)">x</b>
+	</div>
+	
+	<div class="tableLayer">
+		<a>행렬만들기</a><br>
+		<aj>행렬 만들기 도우미 버튼을 클릭하셨습니다.<br>
+		숫자 , 숫자 <br>형식으로 입력하여 주세요. (한 자리 숫자만 가능합니다)<br>ex) 3 4 == [[,,,],[,,,],[,,,]]</aj><br>
+		<mr></mr>
+		<b class="close">x</b>
+	</div>
+	
+</body>
+</html>
